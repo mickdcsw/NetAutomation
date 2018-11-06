@@ -1,0 +1,11 @@
+---
+
+- name: IOS Test Playbook
+  hosts: CSR
+  gather_facts: false
+  #ansible_connection: network_cli
+
+  tasks:
+  - name: Set NTP Server
+    ios_config:
+      config: "{{ lookup('template', 'ntp_config.j2') }}"
