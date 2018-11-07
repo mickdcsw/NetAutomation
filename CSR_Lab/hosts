@@ -3,3 +3,7 @@
 10.104.15.36
 10.104.15.37
 
+[CSR:vars]
+ansible_network_os=ios
+ansible_connection=network_cli
+ansible_ssh_user=admin

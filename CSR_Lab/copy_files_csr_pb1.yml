@@ -1,0 +1,22 @@
+---
+
+- name: Copy files to/from CSR flash
+  hosts: all
+  gather_facts: False
+
+  tasks:
+    - name: enable scp
+      ios_config:
+        lines:
+          - aaa new-model
+          - aaa authentication login default local
+          - aaa authorization exec default local
+          - ip scp server enable
+
+    - name: copy hosts file to CSR router
+      net_put:
+        src: hosts
+
+    - name: copy files from CSR router
+      net_get:
+        src: csrlxc-cfg.log

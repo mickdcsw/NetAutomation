@@ -1,0 +1,13 @@
+---
+
+- name: Add new QoS map configuration
+  gather_facts: False
+  hosts: CSR
+
+  tasks:
+    - name: Configure class-maps with CLI
+      ios_config:
+        lines:
+          - match protocol skydrive
+          - match protocol ftp
+        parents: ['class-map match-any QOS_MARK_LOW']
