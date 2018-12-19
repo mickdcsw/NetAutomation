@@ -1,0 +1,29 @@
+---
+
+- name: Collect IOS facts and save to files
+  hosts: CSR
+  vars:
+  - results: results
+  tasks:
+  - name: Create Directory if needed
+    file: path={{results}} state=directory
+      run_once: true
+  # Create file if needed
+  - name: Create files 
+    file:
+      path: "{{results}}/report.log"
+      state: touch
+  # Use built in ios_facts module
+  - ios_facts:
+    register: result
+  # Copy contents of ansible_facts to file named for each host
+  - copy:
+      content: "{{result.ansible_facts|to_nice_yaml(indent=2)}}"
+      dest: "{{results}}/{{inventory_hostname}}.yml"
+  # parse ansible_facts and write select values ot log file
+  - lineinfile:
+      dest: "{{results}}/report.log"
+      regexp: "{{inventory_hostname}}"
+      line:
+        - "{{inventory_hostname}} {{ansible_net_model}}"
+        - "{{inventory_hostname}} {{ansible_net_version}}"

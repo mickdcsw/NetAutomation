@@ -2,8 +2,24 @@
 [CSR]
 10.104.15.36
 10.104.15.37
+10.104.15.38
+10.104.15.39
+10.104.15.40
+
+[spine]
+10.104.15.36
+10.104.15.37
+
+[rack1_leaf]
+10.104.15.38
+10.104.15.39
+
+[nat_router]
+10.104.15.40
 
 [CSR:vars]
 ansible_network_os=ios
 ansible_connection=network_cli
 ansible_ssh_user=admin
+
+# ansible_python_interpreter=/home/mick/VENV/ansible_venv/lib/python3.6/

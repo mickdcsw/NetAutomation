@@ -5,7 +5,7 @@
   gather_facts: False
 
   tasks:
-    - name: enable scp
+    - name: enable SCP on the device
       ios_config:
         lines:
           - aaa new-model

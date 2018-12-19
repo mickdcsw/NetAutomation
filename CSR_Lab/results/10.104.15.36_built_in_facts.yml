@@ -1,0 +1,67 @@
+ansible_net_all_ipv4_addresses:
+- 10.104.15.36
+ansible_net_all_ipv6_addresses: []
+ansible_net_filesystems:
+- 'bootflash:'
+ansible_net_filesystems_info:
+  'bootflash:':
+    spacefree_kb: 6295380
+    spacetotal_kb: 7712692
+ansible_net_gather_subset:
+- hardware
+- default
+- interfaces
+ansible_net_hostname: CSR1kv-1
+ansible_net_image: bootflash:packages.conf
+ansible_net_interfaces:
+  GigabitEthernet1:
+    bandwidth: 1000000
+    description: null
+    duplex: Full
+    ipv4:
+    - address: 10.104.15.36
+      subnet: '24'
+    lineprotocol: 'up '
+    macaddress: 0050.5683.0267
+    mediatype: RJ45
+    mtu: 1500
+    operstatus: up
+    type: CSR vNIC
+  GigabitEthernet2:
+    bandwidth: 1000000
+    description: null
+    duplex: Full
+    ipv4: []
+    lineprotocol: 'up '
+    macaddress: 0050.5683.f6ec
+    mediatype: RJ45
+    mtu: 1500
+    operstatus: up
+    type: CSR vNIC
+  GigabitEthernet3:
+    bandwidth: 1000000
+    description: null
+    duplex: Full
+    ipv4: []
+    lineprotocol: 'up '
+    macaddress: 0050.5683.1ff5
+    mediatype: RJ45
+    mtu: 1500
+    operstatus: up
+    type: CSR vNIC
+  GigabitEthernet4:
+    bandwidth: 1000000
+    description: null
+    duplex: Full
+    ipv4: []
+    lineprotocol: 'up '
+    macaddress: 0050.5683.f3a9
+    mediatype: RJ45
+    mtu: 1500
+    operstatus: up
+    type: CSR vNIC
+ansible_net_memfree_mb: 1857908
+ansible_net_memtotal_mb: 2189938
+ansible_net_model: CSR1000V
+ansible_net_serialnum: 90KE4T29D7Y
+ansible_net_version: 16.06.04

@@ -1,0 +1,25 @@
+---
+
+- name: Gather facts from IOS devices using SNMP and print to a files
+  hosts: CSR
+  gather_facts: false
+  vars:
+  - results: results
+
+  tasks:
+  - name: Configure SNMP community on IOS devices
+    ios_config:
+      lines:
+      - snmp-server community md-lab rw
+# SNMP Gather facts not working when tested in virtual environment
+# error - fatal: [10.104.15.39]: FAILED! => {"changed": false, "msg": "Missing required pysnmp module (check docs)"}
+
+  - name: Gather facts using SNMP
+    snmp_facts:
+      host: "{{inventory_hostname}}"
+      version: v2
+      community: md-lab
+  - name: convert facts from JSON to YAML and write to files
+    copy:
+      content: "{{hostvars[inventory_hostname]|to_nice_yaml(indent=2)}}"
+      dest: "{{results}}/{{inventory_hostname}}_built_in_facts.yml"

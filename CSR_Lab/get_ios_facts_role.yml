@@ -1,0 +1,33 @@
+---
+
+- hosts: CSR
+  vars:
+  - results: results
+
+  tasks:
+  - name: Define the Directory
+    file:
+      path: "{{results}}"
+      state: directory
+    run_once: true
+  - name: collect facts from cisco ios using ansible-network.cisco_ios role
+    import_role:
+      name: ansible-network.cisco_ios
+      tasks_from: get_facts
+    vars:
+      subset:
+        - system
+        - bgp
+        - cdp
+    register: device_facts
+#    - name: make sure all files are removed
+#      file:
+#        path: {{results}}
+#        state: absent
+#      changed_when: no
+#      check_mode: no
+  - name: convert facts from JSON to YAML and write to files
+    copy:
+#      content: "{{device_facts.ansible_facts|to_nice_yaml(indent=2)}}"
+      content: "{{ansible_facts|to_nice_yaml(indent=2)}}"
+      dest: "{{results}}/{{inventory_hostname}}_ios_role_facts.yml"

@@ -1,0 +1,17 @@
+---
+
+- name: show version
+  hosts: spine
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: telnet to router
+      telnet:
+        user: admin
+        password: gam30n
+        login_prompt: "Username: "
+        prompts:
+          - '[>|#]'
+        command:
+          - terminal length 0
+          - show version

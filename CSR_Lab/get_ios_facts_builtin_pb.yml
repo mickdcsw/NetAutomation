@@ -1,0 +1,21 @@
+---
+
+- name: Collect IOS facts using the Ansible built in module
+  hosts: CSR
+  gather_facts: false
+  vars:
+  - results: results
+
+  tasks:
+  - name: Define the Directory
+    file:
+      path: "{{results}}"
+      state: directory
+    run_once: true
+  - name: Get the IOS facts from devices
+    ios_facts:
+    register: device_facts
+  - name: convert facts from JSON to YAML and write to files
+    copy:
+      content: "{{device_facts.ansible_facts|to_nice_yaml(indent=2)}}"
+      dest: "{{results}}/{{inventory_hostname}}_built_in_facts.yml"
